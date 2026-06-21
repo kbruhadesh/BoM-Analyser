@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  ::selection {
+    background: rgba(88, 166, 255, 0.3);
+    color: #F0F6FC;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0D1117; }
+  ::-webkit-scrollbar-thumb { background: #30363D; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #6E7681; }
+}
+
+@layer components {
+  /* ── Scope panel — the signature element ───────────────────────────────── */
+  .scope-panel {
+    @apply bg-canvas border border-border rounded;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  /* ── Card surface ───────────────────────────────────────────────────────── */
+  .card {
+    @apply bg-surface border border-border rounded-md;
+  }
+
+  /* ── Monospaced data cell ───────────────────────────────────────────────── */
+  .data-cell {
+    @apply font-mono text-sm tabular-nums;
+  }
+
+  /* ── Vendor colour badges ───────────────────────────────────────────────── */
+  .badge-digikey { @apply bg-trace/10 text-trace border border-trace/20; }
+  .badge-mouser  { @apply bg-purple/10 text-purple border border-purple/20; }
+  .badge-arrow   { @apply bg-orange/10 text-orange border border-orange/20; }
+  .badge-lcsc    { @apply bg-stock/10 text-stock border border-stock/20; }
+  .badge-robu    { @apply bg-warn/10 text-warn border border-warn/20; }
+  .badge-evelta  { @apply bg-danger/10 text-danger border border-danger/20; }
+
+  /* ── Price chip tiers ───────────────────────────────────────────────────── */
+  .price-best {
+    @apply bg-stock/10 text-stock border border-stock/30 font-mono font-medium;
+  }
+  .price-mid {
+    @apply bg-warn/10 text-warn border border-warn/30 font-mono;
+  }
+  .price-high {
+    @apply bg-danger/10 text-danger border border-danger/30 font-mono;
+  }
+  .price-oos {
+    @apply bg-elevated text-ink-3 border border-border font-mono;
+  }
+
+  /* ── Input field ────────────────────────────────────────────────────────── */
+  .field {
+    @apply bg-canvas border border-border rounded px-3 py-2 text-base text-ink
+           placeholder-ink-3 outline-none transition-colors
+           focus:border-trace focus:shadow-glow-blue;
+  }
+
+  /* ── Button variants ────────────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded text-sm font-medium
+           border border-border bg-elevated text-ink-2
+           hover:bg-surface hover:text-ink hover:border-muted
+           active:scale-[0.98] transition-all duration-100 cursor-pointer
+           disabled:opacity-40 disabled:cursor-not-allowed select-none;
+  }
+  .btn-primary {
+    @apply bg-trace/15 border-trace/40 text-trace
+           hover:bg-trace/25 hover:border-trace/60;
+  }
+  .btn-success {
+    @apply bg-stock/15 border-stock/40 text-stock
+           hover:bg-stock/25 hover:border-stock/60;
+  }
+  .btn-ghost {
+    @apply bg-transparent border-transparent text-ink-3
+           hover:bg-elevated hover:text-ink-2 hover:border-border;
+  }
+
+  /* ── Status dots ────────────────────────────────────────────────────────── */
+  .dot-green { @apply w-1.5 h-1.5 rounded-full bg-stock shadow-glow-green; }
+  .dot-amber { @apply w-1.5 h-1.5 rounded-full bg-warn; }
+  .dot-red   { @apply w-1.5 h-1.5 rounded-full bg-danger shadow-glow-red; }
+  .dot-gray  { @apply w-1.5 h-1.5 rounded-full bg-muted; }
+
+  /* ── Section label (eyebrow) ────────────────────────────────────────────── */
+  .eyebrow {
+    @apply text-2xs font-mono font-medium text-ink-3 uppercase tracking-widest;
+  }
+
+  /* ── Table ──────────────────────────────────────────────────────────────── */
+  .data-table { @apply w-full border-collapse text-sm; }
+  .data-table th {
+    @apply text-2xs font-mono font-medium text-ink-3 uppercase tracking-wider
+           px-3 py-2 text-left border-b border-border bg-elevated sticky top-0 z-10;
+  }
+  .data-table td {
+    @apply px-3 py-2 border-b border-border/50 text-ink-2 align-middle;
+  }
+  .data-table tr:hover td { @apply bg-elevated/40; }
+  .data-table tr:last-child td { @apply border-b-0; }
+}
+
+@layer utilities {
+  .tabular { font-variant-numeric: tabular-nums; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
